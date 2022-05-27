@@ -27,7 +27,10 @@ public class MatchingEngine {
             orderBook = new OrderBook();
             orderBooks.put(order.getStockId(), orderBook);
         }
-        orderBook.applyOrder(order);
+        boolean isOrderBookEmpty = orderBook.applyOrder(order);
+        if (isOrderBookEmpty) {
+            orderBooks.remove(order.getStockId());
+        }
     }
 
     public Map<String, OrderBook> getOrderBooks() {

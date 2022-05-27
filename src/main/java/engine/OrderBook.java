@@ -14,7 +14,7 @@ public class OrderBook {
 
     private final Map<Long, Order> orders = new HashMap<>();
 
-    public void applyOrder(Order order) throws OrderNotFoundException {
+    public boolean applyOrder(Order order) throws OrderNotFoundException {
         synchronized (orders) {
             if (order.isAdd()) {
                 ConsoleUtils.printAddedOrder(order);
@@ -30,6 +30,7 @@ public class OrderBook {
             } else {
                 cancelOrder(order);
             }
+            return orders.isEmpty();
         }
     }
 
